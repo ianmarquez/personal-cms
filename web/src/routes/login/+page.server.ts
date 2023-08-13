@@ -3,7 +3,7 @@ import type { ClientResponseError } from 'pocketbase';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
-	default: async ({ locals, request }) => {
+	login: async ({ locals, request }) => {
 		const { email, password }: LoginFormData = Object.fromEntries(await request.formData()) as {
 			email: string;
 			password: string;
@@ -25,5 +25,6 @@ export const actions: Actions = {
 		}
 
 		throw redirect(303, '/');
-	}
+	},
+	OAuthDiscord: async ({ locals }) => {}
 };

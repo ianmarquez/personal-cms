@@ -1,10 +1,34 @@
 import { generateUsername } from '$lib/utils';
 import { error, redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
 import type { ClientResponseError } from 'pocketbase';
+import type { Actions, PageServerLoad } from './$types';
+
+export type OutputType = {
+	authProviderRedirect: string;
+	authProviderState: string;
+};
+
+export const load: PageServerLoad<OutputType> = async ({ locals, url }) => {
+	const authMethods = await locals.pb.collection('users').listAuthMethods();
+	if (!authMethods) {
+		return {
+			authProviderState: '',
+			authProviderRedirect: ''
+		};
+	}
+	const redirectUrl = `${url.origin}/oauth`;
+	const [authProvider] = authMethods.authProviders.filter((item) => item.name === 'discord');
+	const authProviderRedirect = `${authProvider.authUrl}${redirectUrl}`;
+	const state = authProvider.state;
+
+	return {
+		authProviderState: state,
+		authProviderRedirect
+	};
+};
 
 export const actions: Actions = {
-	default: async ({ locals, request }) => {
+	register: async ({ locals, request }) => {
 		const body: RegisterUserFormData = Object.fromEntries(await request.formData()) as {
 			email: string;
 			password: string;
@@ -27,5 +51,30 @@ export const actions: Actions = {
 		}
 
 		throw redirect(303, '/login');
+	},
+	OAuthDiscord: async ({ locals, url, cookies }) => {
+		let authProviderRedirect: string = '';
+		try {
+			const authMethods = await locals.pb.collection('users').listAuthMethods();
+			if (!authMethods) {
+				return {
+					authProviders: ''
+				};
+			}
+			const redirectUrl = `${url.origin}/oauth`;
+			const [authProvider] = authMethods.authProviders.filter((item) => item.name === 'discord');
+			if (!authProvider) return { authProviders: '' };
+			authProviderRedirect = `${authProvider.authUrl}${redirectUrl}`;
+
+			const { state, codeVerifier } = authProvider;
+			cookies.set('state', state);
+			cookies.set('codeVerifier', codeVerifier);
+		} catch (err: unknown) {
+			const clientResponseErr = err as ClientResponseError;
+			console.error('Registration Via Discord Error:');
+			console.table(structuredClone(clientResponseErr));
+			throw error(clientResponseErr.status || 404);
+		}
+		throw redirect(302, authProviderRedirect);
 	}
 };

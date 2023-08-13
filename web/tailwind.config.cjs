@@ -6,7 +6,7 @@ const forms = require('@tailwindcss/forms');
 const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	daisyui: {
-		themes: ['light', 'dark', 'synthwave', 'dracula']
+		themes: ['winter', 'dracula']
 	},
 	theme: {
 		extend: {}

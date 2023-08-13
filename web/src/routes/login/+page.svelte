@@ -1,8 +1,10 @@
 <script lang="ts">
+	import Icon from '@iconify/svelte';
+
 	export let form;
 </script>
 
-<div class="flex flex-col items-center h-full w-full">
+<div class="flex flex-col items-center h-full w-full max-w-md m-auto">
 	<h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-base-content">
 		Login to your account
 	</h2>
@@ -11,7 +13,7 @@
 			>register</a
 		> if you don't have an account.
 	</p>
-	<form class="flex flex-col items-center space-y-2 w-full pt-4 max-w-md" method="POST">
+	<form action="?/login" class="flex flex-col items-center space-y-2 w-full pt-4" method="POST">
 		<div class="form-control w-full">
 			<label for="email" class="label font-medium pb-1">
 				<span class="label-text">Email</span>
@@ -50,5 +52,11 @@
 				<span>You must verify your email before you can login.</span>
 			</div>
 		{/if}
+		<div class="w-full">
+			<button formaction="?/OAuthDiscord" class="btn btn-secondary w-full" type="submit">
+				<Icon icon="ic:baseline-discord" />
+				Sign In With Discord
+			</button>
+		</div>
 	</form>
 </div>
