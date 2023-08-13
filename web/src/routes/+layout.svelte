@@ -4,7 +4,7 @@
 </script>
 
 <div class="min-h-full">
-	<nav class="navbar bg-base-100 border-b">
+	<nav class="navbar bg-base-100 shadow-lg">
 		<div class="flex-1">
 			<a href="/" class="btn btn-ghost normal-case text-xl">Personal CMS</a>
 		</div>
@@ -23,7 +23,7 @@
 					<!-- svelte-ignore a11y-label-has-associated-control -->
 					<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 						<div class="w-10 rounded-full">
-							<img src="https://placeimg.com/80/80/people" alt="User Avatar" />
+							<img src="http://via.placeholder.com/80x80" alt="User Avatar" />
 						</div>
 					</label>
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->

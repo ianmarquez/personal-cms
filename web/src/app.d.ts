@@ -18,6 +18,14 @@ declare global {
 		password: string;
 		passwordConfirm: string;
 		name: string;
+		username: string;
+	}
+	declare class LoginFormData {
+		email: string;
+		password: string;
+	}
+	declare class ResetPasswordFormData {
+		email: string;
 	}
 }
 
