@@ -67,13 +67,18 @@ export const actions: Actions = {
 			authProviderRedirect = `${authProvider.authUrl}${redirectUrl}`;
 
 			const { state, codeVerifier } = authProvider;
+			console.log(authProvider);
+			console.log(authProviderRedirect);
 			cookies.set('state', state);
 			cookies.set('codeVerifier', codeVerifier);
-		} catch (err: unknown) {
+		} catch (err: any) {
 			const clientResponseErr = err as ClientResponseError;
-			console.error('Registration Via Discord Error:');
-			console.table(structuredClone(clientResponseErr));
-			throw error(clientResponseErr.status || 404);
+			if (err satisfies ClientResponseError) {
+				console.error('Registration Via Discord Error:');
+				console.table(structuredClone(clientResponseErr));
+				throw error(clientResponseErr.status, err.message);
+			}
+			throw error(500, 'An Error has occured');
 		}
 		throw redirect(302, authProviderRedirect);
 	}

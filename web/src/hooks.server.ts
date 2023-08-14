@@ -9,8 +9,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (event.locals.pb.authStore.isValid) {
 		try {
 			await event.locals.pb.collection('users').authRefresh();
-		} catch (err) {
-			console.error(err);
+		} catch (_) {
 			event.locals.pb.authStore.clear();
 		}
 	}
@@ -18,6 +17,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const response = await resolve(event);
 	let cookie = event.locals.pb.authStore.exportToCookie({ httpOnly: PUBLIC_ENVIRONMENT === 'dev' });
-	response.headers.set('set-cookie', cookie);
+	response.headers.append('set-cookie', cookie);
 	return response;
 };

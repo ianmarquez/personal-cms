@@ -10,32 +10,18 @@ export const GET: RequestHandler = async ({ locals, url, cookies }) => {
 	const state = url.searchParams.get('state');
 	const code = url.searchParams.get('code');
 
-	const authMethods = await locals.pb.collection('users').listAuthMethods();
-	if (!authMethods?.authProviders) {
-		console.log('No valid auth providers set up');
+	if (expectedState !== state || expectedVerifier !== code) {
+		expectedState !== state &&
+			console.log('Returned State Does not Match Expected', expectedState, state);
+		expectedVerifier !== code &&
+			console.log('Returned code does not match expected', expectedVerifier, code);
 		throw redirect(303, '/register');
 	}
-
-	const [authProvider] = authMethods.authProviders.filter(
-		(provider) => provider.name === 'discord'
-	);
-
-	if (!authProvider) {
-		console.log('Provider not found');
-		throw redirect(303, '/register');
-	}
-
-	if (expectedState !== state) {
-		console.log('Returned State Does not Match Expected', expectedState, state);
-		throw redirect(303, '/register');
-	}
-
-	console.log(url.searchParams.toString());
 
 	try {
 		await locals.pb
 			.collection('users')
-			.authWithOAuth2Code(authProvider.name, code || '', expectedVerifier || '', redirectUrl, {
+			.authWithOAuth2Code('discord', code || '', expectedVerifier || '', redirectUrl, {
 				username: generateUsername('new_user')
 			});
 	} catch (err) {
