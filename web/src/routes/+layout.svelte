@@ -1,4 +1,5 @@
 <script>
+	import { getImageUrl } from '$lib/utils';
 	import '../app.postcss';
 	export let data;
 </script>
@@ -23,7 +24,12 @@
 					<!-- svelte-ignore a11y-label-has-associated-control -->
 					<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 						<div class="w-10 rounded-full">
-							<img src="http://via.placeholder.com/80x80" alt="User Avatar" />
+							<img
+								src={data.user?.avatar
+									? getImageUrl(data.user.collectionName, data.user.id, data.user.avatar)
+									: 'https://ui-avatars.com/api/?name=' + data.user?.name}
+								alt="User Avatar"
+							/>
 						</div>
 					</label>
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -47,7 +53,7 @@
 			{/if}
 		</div>
 	</nav>
-	<main class="py-10">
+	<main class="py-4">
 		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 			<slot />
 		</div>
