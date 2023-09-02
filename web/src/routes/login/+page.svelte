@@ -16,7 +16,7 @@
 	<form action="?/login" class="flex flex-col items-center space-y-2 w-full pt-4" method="POST">
 		<div class="form-control w-full">
 			<label for="email" class="label font-medium pb-1">
-				<span class="label-text">Email</span>
+				<span class="label-text">Email or Username</span>
 			</label>
 			<input type="text" name="email" class="input input-bordered w-full max-w-md" />
 		</div>

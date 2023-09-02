@@ -44,7 +44,7 @@
 							<a href="/my/settings">Settings</a>
 						</li>
 						<li>
-							<form action="/logout" method="POST">
+							<form action="/logout" method="POST" class="w-full flex flex-row">
 								<button type="submit" class="w-full text-start">Logout</button>
 							</form>
 						</li>
