@@ -1,4 +1,5 @@
 const { randomBytes } = await import('node:crypto');
+import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
 
 export const generateUsername = (name: string) => {
 	const id = randomBytes(2).toString('hex');
@@ -10,4 +11,4 @@ export const getImageUrl = (
 	recordId: string,
 	fileName: string,
 	size = '0x0'
-) => `http://localhost:8090/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
+) => `${PUBLIC_POCKETBASE_URL}/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
