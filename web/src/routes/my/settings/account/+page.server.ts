@@ -3,7 +3,7 @@ import { ClientResponseError } from 'pocketbase';
 
 export const actions: Actions = {
 	updateEmail: async ({ request, locals }) => {
-		if (!locals.user) throw redirect(303, '/login');
+		if (!locals.user || !locals.pb.authStore.isValid) throw redirect(303, '/login');
 		const data = Object.fromEntries(await request.formData()) as { email: string };
 		try {
 			await locals.pb.collection('users').requestEmailChange(data.email);
@@ -20,7 +20,7 @@ export const actions: Actions = {
 		};
 	},
 	updateUsername: async ({ request, locals }) => {
-		if (!locals.user) throw redirect(303, '/login');
+		if (!locals.user || !locals.pb.authStore.isValid) throw redirect(303, '/login');
 		const data = Object.fromEntries(await request.formData()) as { username: string };
 
 		let userWithUserNameExists: boolean = false;

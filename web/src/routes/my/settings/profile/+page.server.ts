@@ -9,8 +9,8 @@ export const actions: Actions = {
 		}
 
 		try {
-			if (!locals?.user?.id) {
-				throw error(401, 'Please login to update your profile');
+			if (!locals.user?.id || !locals.pb.authStore.isValid) {
+				throw redirect(303, '/login');
 			}
 			const { name, avatar } = await locals.pb.collection('users').update(locals?.user?.id, data);
 			locals.user.name = name;
