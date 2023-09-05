@@ -1,11 +1,14 @@
+import { error } from 'console';
 import { ClientResponseError } from 'pocketbase';
 import type { PageServerLoad } from './$types';
-import { error } from 'console';
+import type { ProjectsResponse } from '$lib/types/pocketbase-types';
 
 export const load: PageServerLoad = ({ locals, params }) => {
 	const getProject = async (projectId: string) => {
 		try {
-			const project = structuredClone(await locals.pb.collection('projects').getOne(projectId));
+			const project = structuredClone(
+				await locals.pb.collection('projects').getOne<ProjectsResponse>(projectId)
+			);
 			return project;
 		} catch (err: unknown) {
 			console.log(err);
