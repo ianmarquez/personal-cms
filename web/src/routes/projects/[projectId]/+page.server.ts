@@ -1,7 +1,7 @@
+import type { ProjectsResponse } from '$lib/types/pocketbase-types';
 import { error } from 'console';
 import { ClientResponseError } from 'pocketbase';
 import type { PageServerLoad } from './$types';
-import type { ProjectsResponse } from '$lib/types/pocketbase-types';
 
 export const load: PageServerLoad = ({ locals, params }) => {
 	const getProject = async (projectId: string) => {
