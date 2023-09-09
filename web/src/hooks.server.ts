@@ -9,11 +9,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (event.locals.pb.authStore.isValid) {
 		try {
 			await event.locals.pb.collection('users').authRefresh();
+			event.locals.user = structuredClone(pb.authStore.model);
 		} catch (_) {
 			event.locals.pb.authStore.clear();
+			event.locals.user = null;
 		}
 	}
-	event.locals.user = structuredClone(pb.authStore.model);
 
 	const response = await resolve(event);
 	let cookie = event.locals.pb.authStore.exportToCookie({ httpOnly: PUBLIC_ENVIRONMENT === 'dev' });

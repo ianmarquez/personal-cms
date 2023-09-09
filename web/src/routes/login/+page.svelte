@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Input from '$lib/components/Input.svelte';
 	import Icon from '@iconify/svelte';
 
 	export let form;
@@ -14,18 +15,14 @@
 		> if you don't have an account.
 	</p>
 	<form action="?/login" class="flex flex-col items-center space-y-2 w-full pt-4" method="POST">
-		<div class="form-control w-full">
-			<label for="email" class="label font-medium pb-1">
-				<span class="label-text">Email or Username</span>
-			</label>
-			<input type="text" name="email" class="input input-bordered w-full max-w-md" />
-		</div>
-		<div class="form-control w-full">
-			<label for="password" class="label font-medium pb-1">
-				<span class="label-text">Password</span>
-			</label>
-			<input type="password" name="password" class="input input-bordered w-full max-w-md" />
-		</div>
+		<Input
+			label="Email"
+			type="text"
+			id="email"
+			value={form?.data?.email || ''}
+			errors={form?.errors?.email || []}
+		/>
+		<Input label="Password" type="password" id="password" errors={form?.errors?.password || []} />
 		<div class="w-full">
 			<a
 				href="/reset-password"

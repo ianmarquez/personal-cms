@@ -41,6 +41,7 @@
 		"@iconify/svelte": "^3.1.4",
 		"@types/node": "^20.4.10",
 		"pocketbase": "^0.16.0",
-		"svelte-hero-icons": "^5.0.0"
+		"svelte-hero-icons": "^5.0.0",
+		"zod": "^3.22.2"
 	}
 }
