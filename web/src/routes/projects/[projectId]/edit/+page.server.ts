@@ -58,7 +58,7 @@ export const actions: Actions = {
 			);
 		}
 
-		throw redirect(303, `/projects/${params.projectId}`);
+		throw redirect(303, `/my/projects`);
 	},
 	deleteThumbnail: async ({ params, locals }) => {
 		if (!params.projectId) throw error(400, 'Project ID is required');
@@ -79,5 +79,8 @@ export const actions: Actions = {
 		return {
 			success: true
 		};
+	},
+	cancelChanges: async () => {
+		throw redirect(303, '/my/projects/');
 	}
 };

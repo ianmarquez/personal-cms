@@ -1,7 +1,12 @@
 <script lang="ts">
-	import { Input } from '$lib/components';
+	import { enhance } from '$app/forms';
+	import { Input, Modal } from '$lib/components';
 	import { getImageUrl } from '$lib/utils.js';
 	import { Icon, Trash } from 'svelte-hero-icons';
+
+	let modalOpen: boolean = false;
+
+	$: modalOpen;
 
 	export let data;
 </script>
@@ -13,6 +18,7 @@
 			method="POST"
 			class="flex flex-col space-y-2 w-full items-center"
 			enctype="multipart/form-data"
+			use:enhance
 		>
 			<h3 class="text-3xl font-bold">Edit {data.project.name}</h3>
 			<Input label="Project name" type="text" id="name" required value={data.project.name} />
@@ -69,6 +75,23 @@
 				/>
 				<div class="w-full max-w-lg pt-3">
 					<button type="submit" class="btn btn-primary w-full max-w-lg">Save Changes</button>
+				</div>
+				<div class="w-full max-w-lg pt-3">
+					<Modal label={data.project.id} checked={modalOpen}>
+						<span slot="trigger" class="btn btn-secondary w-full">Cancel</span>
+						<div slot="heading">
+							<h3 class="text-2xl">Leave without saving {data.project.name}?</h3>
+							<p class="text-base font-normal mt-2">
+								Changes made will not be saved. Are you sure you want to leave?
+							</p>
+						</div>
+						<div slot="actions" class="flex w-full items-center justify-center space-x-2">
+							<label for={data.project.id} class="btn btn-outline">No</label>
+							<form action="?/cancelChanges" method="POST" use:enhance>
+								<button class="btn btn-secondary" type="submit">Yes</button>
+							</form>
+						</div>
+					</Modal>
 				</div>
 			</div>
 		</form>
