@@ -1,7 +1,9 @@
 import type { ProjectsResponse } from '$lib/types/pocketbase-types';
-import { error, redirect, type Actions } from '@sveltejs/kit';
+import { error, redirect, type Actions, fail } from '@sveltejs/kit';
 import { ClientResponseError } from 'pocketbase';
 import type { PageServerLoad } from './$types';
+import { validateData } from '$lib/utils';
+import { updateProjectSchema } from '$lib/schemas';
 
 export const load: PageServerLoad = ({ locals, params }) => {
 	const projectId = params.projectId;
@@ -37,16 +39,29 @@ export const load: PageServerLoad = ({ locals, params }) => {
 
 export const actions: Actions = {
 	updateProject: async ({ request, locals, params }) => {
-		const formData = await request.formData();
-		const thumbnail = formData.get('thumbnail') as File;
+		const body = await request.formData();
 		if (!params.projectId) throw error(400, 'Project ID is required');
 
-		if (thumbnail.size === 0) {
-			formData.delete('thumbnail');
+		const thumb = body.get('thumbnail') as File;
+		if (thumb.size === 0) {
+			body.delete('thumbnail');
+		}
+
+		const { formData, errors } = await validateData<UpdateProjectFormData>(
+			body,
+			updateProjectSchema
+		);
+
+		if (errors) {
+			delete formData.thumbnail;
+			return fail(400, {
+				data: formData,
+				errors: errors.fieldErrors
+			});
 		}
 
 		try {
-			await locals.pb.collection('projects').update(params.projectId, formData);
+			await locals.pb.collection('projects').update(params.projectId, body);
 		} catch (err: any) {
 			console.error(err);
 			if (err instanceof ClientResponseError) {
@@ -62,6 +77,7 @@ export const actions: Actions = {
 	},
 	deleteThumbnail: async ({ params, locals }) => {
 		if (!params.projectId) throw error(400, 'Project ID is required');
+
 		try {
 			await locals.pb.collection('projects').update(params.projectId, {
 				thumbnail: null

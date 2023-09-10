@@ -27,6 +27,9 @@ export const actions: Actions = {
 		);
 		if (errors) {
 			delete formData.thumbnail;
+			if (errors.fieldErrors.user) {
+				throw redirect(303, '/login');
+			}
 			return fail(400, {
 				data: formData,
 				errors: errors.fieldErrors

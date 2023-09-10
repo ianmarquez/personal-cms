@@ -1,14 +1,31 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { Input, Modal } from '$lib/components';
+	import { invalidateAll } from '$app/navigation';
+	import { Input, Modal, TextArea } from '$lib/components';
 	import { getImageUrl } from '$lib/utils.js';
+	import type { SubmitFunction } from '@sveltejs/kit';
 	import { Icon, Trash } from 'svelte-hero-icons';
 
-	let modalOpen: boolean = false;
+	export let data;
+	export let form;
 
+	let modalOpen: boolean = false;
 	$: modalOpen;
 
-	export let data;
+	let loading: boolean = false;
+
+	const submitUpdateProject: SubmitFunction = () => {
+		loading = true;
+		return async ({ result, update }) => {
+			if (result.type === 'success') {
+				await invalidateAll();
+			} else if (result.type === 'error') {
+			} else {
+				await update();
+			}
+			loading = false;
+		};
+	};
 </script>
 
 <div class="flex flex-col w-full h-full p-2">
@@ -18,29 +35,36 @@
 			method="POST"
 			class="flex flex-col space-y-2 w-full items-center"
 			enctype="multipart/form-data"
-			use:enhance
+			use:enhance={submitUpdateProject}
 		>
 			<h3 class="text-3xl font-bold">Edit {data.project.name}</h3>
-			<Input label="Project name" type="text" id="name" required value={data.project.name} />
+			<Input
+				label="Project name"
+				type="text"
+				id="name"
+				value={form?.data?.name || data.project.name}
+				errors={form?.errors?.name || []}
+			/>
 			<Input
 				label="Project Tagline"
 				type="text"
 				id="tagline"
-				required
-				value={data.project.tagline}
+				value={form?.data?.tagline || data.project.tagline}
+				errors={form?.errors?.tagline || []}
 			/>
-			<Input label="Project URL" type="text" id="url" required value={data.project.url} />
-			<div class="form-control w-full max-w-lg">
-				<label for="description" class="label font-medium pb-1">
-					<span class="label-text">Project Description</span>
-				</label>
-				<textarea
-					name="description"
-					id="description"
-					class="textarea textarea-bordered h-24 resize-none"
-					value={data.project.description}
-				/>
-			</div>
+			<Input
+				label="Project URL"
+				type="text"
+				id="url"
+				value={form?.data?.url || data.project.url}
+				errors={form?.errors?.url || []}
+			/>
+			<TextArea
+				label="Project Description"
+				id="description"
+				value={form?.data?.description || data.project.description}
+				errors={form?.errors?.description || []}
+			/>
 			<div class="form-control w-full max-w-lg">
 				<label for="thumbnail" class="label font-medium pb-1">
 					<span class="label-text">Thumbnail</span>
@@ -73,6 +97,15 @@
 					name="thumbnail"
 					class="file-input file-input-bordered w-full max-w-lg mt-2"
 				/>
+				{#if form?.errors?.thumbnail && form?.errors?.thumbnail?.length > 0}
+					{#each form.errors.thumbnail as error}
+						<label for="thumbnail" class="label py-0 pt-1">
+							<span class="label-text-alt text-error">
+								{error}
+							</span>
+						</label>
+					{/each}
+				{/if}
 				<div class="w-full max-w-lg pt-3">
 					<button type="submit" class="btn btn-primary w-full max-w-lg">Save Changes</button>
 				</div>
