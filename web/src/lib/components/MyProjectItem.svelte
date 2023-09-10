@@ -13,9 +13,9 @@
 	<div class="avatar">
 		<div class="w-20 rounded">
 			<img
-				src={project.thumbnail
+				src="{project.thumbnail
 					? getImageUrl(project.collectionId, project.id, project.thumbnail, '80x80')
-					: `https://via.placeholder.com/80/4506cb/FFFFFF/?text=${project.name}`}
+					: `https://via.placeholder.com/80/4506cb/FFFFFF/?text=${project.name}`}project"
 				alt="thumbnail"
 			/>
 		</div>
@@ -37,7 +37,7 @@
 			</div>
 			<div slot="actions" class="flex w-full items-center justify-center space-x-2">
 				<label for={project.id} class="btn btn-outline">Cancel</label>
-				<form action="?/deleteProject" method="POST" class="btn btn-error" use:enhance>
+				<form action="?/deleteProject" method="POST" use:enhance>
 					<input type="hidden" name="id" value={project.id} />
 					<button class="btn btn-error">Delete</button>
 				</form>

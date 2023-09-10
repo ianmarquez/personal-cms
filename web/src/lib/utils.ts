@@ -26,9 +26,9 @@ export const validateData = async <T>(
 			errors: null
 		};
 	} catch (err: any) {
-		console.error(err);
 		const error = err as ZodError;
 		const errors = error.flatten();
+		console.log(errors);
 		return {
 			formData: body,
 			errors

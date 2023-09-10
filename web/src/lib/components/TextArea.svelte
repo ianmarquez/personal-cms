@@ -1,29 +1,28 @@
 <script lang="ts">
 	export let value: string = '';
 	export let placeholder: string = '';
-	export let id: string;
-	export let label: string;
-	export let type: 'text' | 'password' | 'email' | 'number' | 'file' = 'text';
+	export let id: string = '';
+	export let label: string = '';
 	export let disabled: boolean = false;
 	export let required: boolean = false;
+
 	export let errors: string[] = [];
 </script>
 
-<div class="form-control w-full max-w-lg mb-2">
+<div class="form-control w-full max-w-lg">
 	<label for={id} class="label font-medium pb-1">
 		<span class="label-text">{label}</span>
 	</label>
-	<input
+	<textarea
 		name={id}
-		class={type === 'file'
-			? 'file-input file-input-bordered w-full max-w-lg'
-			: 'input input-bordered w-full max-w-lg'}
-		{type}
-		{placeholder}
-		{disabled}
-		{required}
+		cols="30"
+		rows="10"
+		class="textarea textarea-bordered h-24 resize-none"
 		{id}
+		{placeholder}
 		{value}
+		{required}
+		{disabled}
 	/>
 	{#if errors.length > 0}
 		{#each errors as error}

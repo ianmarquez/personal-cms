@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { Input } from '$lib/components';
+	import { Input, TextArea } from '$lib/components';
+	export let form;
 </script>
 
 <div class="flex flex-col w-full h-full p-2">
@@ -14,32 +15,34 @@
 		>
 			<h3 class="text-3xl font-bold">Tell us more about this project</h3>
 			<p class="mt-2 text-lg">We'll need the name, tagline, link and description</p>
-			<Input label="Name" type="text" id="name" required />
-			<Input label="Tagline" type="text" id="tagline" />
-			<Input label="Project URL" type="text" id="url" />
-			<div class="form-control w-full max-w-lg">
-				<label for="description" class="label font-medium pb-1">
-					<span class="label-text">Project Description</span>
-				</label>
-				<textarea
-					name="description"
-					id="description"
-					cols="30"
-					rows="10"
-					class="textarea textarea-bordered h-24 resize-none"
-				/>
-			</div>
-			<div class="form-control w-full max-w-lg">
-				<label for="thumbnail" class="label font-medium pb-1">
-					<span class="label-text">Thumbnail</span>
-				</label>
-				<input
-					type="file"
-					name="thumbnail"
-					id="thumbnail"
-					class="file-input file-input-bordered w-full max-w-lg"
-				/>
-			</div>
+			<Input
+				label="Name"
+				type="text"
+				id="name"
+				errors={form?.errors?.name || []}
+				value={form?.data?.name || ''}
+			/>
+			<Input
+				label="Tagline"
+				type="text"
+				id="tagline"
+				errors={form?.errors?.tagline || []}
+				value={form?.data?.tagline || ''}
+			/>
+			<Input
+				label="Project URL"
+				type="text"
+				id="url"
+				errors={form?.errors?.url || []}
+				value={form?.data?.url || ''}
+			/>
+			<TextArea
+				label="Project Description"
+				id="description"
+				errors={form?.errors?.description || []}
+				value={form?.data?.description || ''}
+			/>
+			<Input label="Thumbnail" type="file" id="thumbnail" errors={form?.errors?.thumbnail || []} />
 			<div class="w-full max-w-lg pt-3">
 				<button class="btn btn-primary w-full max-w-lg" type="submit">Create Project</button>
 			</div>

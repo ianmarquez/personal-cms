@@ -1,23 +1,35 @@
-import { error } from '@sveltejs/kit';
-import type { ClientResponseError } from 'pocketbase';
+import { resetPasswordSchema } from '$lib/schemas';
+import { validateData } from '$lib/utils';
+import { error, fail } from '@sveltejs/kit';
+import { ClientResponseError } from 'pocketbase';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
 	default: async ({ locals, request }) => {
-		const { email }: ResetPasswordFormData = Object.fromEntries(await request.formData()) as {
-			email: string;
-		};
+		const { formData, errors } = await validateData<ResetPasswordFormData>(
+			await request.formData(),
+			resetPasswordSchema
+		);
+
+		if (errors) {
+			return fail(400, {
+				success: false,
+				data: formData,
+				errors: errors.fieldErrors
+			});
+		}
 
 		try {
-			await locals.pb.collection('users').requestPasswordReset(email);
+			await locals.pb.collection('users').requestPasswordReset(formData.email);
 			return {
-				success: true
+				success: true,
+				data: formData
 			};
-		} catch (err: unknown) {
-			const clientResponseErr = err as ClientResponseError;
-			console.error('Reset Password Error');
-			console.table(structuredClone(clientResponseErr.data));
-			throw error(clientResponseErr.status, clientResponseErr.response.message);
+		} catch (err: any) {
+			if (err instanceof ClientResponseError) {
+				throw error(err.status, err.message);
+			}
+			throw error(err.status || 400, err.message || 'Something went wrong resetting your password');
 		}
 	}
 };

@@ -27,6 +27,13 @@ declare global {
 	declare class ResetPasswordFormData {
 		email: string;
 	}
+	declare class CreateProjectFormData {
+		name: string;
+		tagline: string;
+		url: string;
+		description: string;
+		thumbnail?: File;
+	}
 }
 
 export {};
