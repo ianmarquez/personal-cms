@@ -54,7 +54,7 @@ export const registerUserSchema = z
 		}
 	});
 
-export const createProjectSchema = z.object({
+export const projectSchema = z.object({
 	name: z
 		.string({ required_error: 'Name is required' })
 		.regex(/^[a-zA-Z ]*$/, { message: 'Name can only contain letters and spaces' })
@@ -95,5 +95,3 @@ export const createProjectSchema = z.object({
 		}),
 	user: z.string({ required_error: 'User is required' })
 });
-
-export const updateProjectSchema = createProjectSchema.omit({ user: true });

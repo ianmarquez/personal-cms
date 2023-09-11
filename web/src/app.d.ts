@@ -33,11 +33,8 @@ declare global {
 		url: string;
 		description: string;
 		thumbnail?: File;
-	}
-	declare class CreateProjectFormData extends ProjectFormData {
 		user: import('pocketbase').default['authStore']['model'];
 	}
-	declare class UpdateProjectFormData extends CreateProjectFormData {}
 }
 
 export {};

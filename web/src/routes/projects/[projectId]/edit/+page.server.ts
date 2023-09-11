@@ -1,9 +1,9 @@
+import { projectSchema } from '$lib/schemas';
 import type { ProjectsResponse } from '$lib/types/pocketbase-types';
-import { error, redirect, type Actions, fail } from '@sveltejs/kit';
+import { validateData } from '$lib/utils';
+import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import { ClientResponseError } from 'pocketbase';
 import type { PageServerLoad } from './$types';
-import { validateData } from '$lib/utils';
-import { updateProjectSchema } from '$lib/schemas';
 
 export const load: PageServerLoad = ({ locals, params }) => {
 	const projectId = params.projectId;
@@ -47,13 +47,13 @@ export const actions: Actions = {
 			body.delete('thumbnail');
 		}
 
-		const { formData, errors } = await validateData<UpdateProjectFormData>(
-			body,
-			updateProjectSchema
-		);
+		const { formData, errors } = await validateData<ProjectFormData>(body, projectSchema);
 
 		if (errors) {
 			delete formData.thumbnail;
+			if (errors.fieldErrors.user) {
+				throw redirect(303, '/login');
+			}
 			return fail(400, {
 				data: formData,
 				errors: errors.fieldErrors

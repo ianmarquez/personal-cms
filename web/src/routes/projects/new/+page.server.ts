@@ -1,8 +1,8 @@
-import { error, redirect, type Actions, fail } from '@sveltejs/kit';
+import { projectSchema } from '$lib/schemas';
+import { validateData } from '$lib/utils';
+import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import { ClientResponseError } from 'pocketbase';
 import type { PageServerLoad } from './$types';
-import { validateData } from '$lib/utils';
-import { createProjectSchema } from '$lib/schemas';
 
 export const load: PageServerLoad = ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
@@ -21,10 +21,7 @@ export const actions: Actions = {
 		}
 		body.append('user', locals.user.id);
 
-		const { formData, errors } = await validateData<CreateProjectFormData>(
-			body,
-			createProjectSchema
-		);
+		const { formData, errors } = await validateData<ProjectFormData>(body, projectSchema);
 		if (errors) {
 			delete formData.thumbnail;
 			if (errors.fieldErrors.user) {
