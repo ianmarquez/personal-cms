@@ -17,7 +17,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	const response = await resolve(event);
-	let cookie = event.locals.pb.authStore.exportToCookie({ httpOnly: PUBLIC_ENVIRONMENT === 'dev' });
+	const cookie = event.locals.pb.authStore.exportToCookie({
+		httpOnly: PUBLIC_ENVIRONMENT === 'dev'
+	});
 	response.headers.append('set-cookie', cookie);
 	return response;
 };
