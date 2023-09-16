@@ -1,14 +1,9 @@
 <script lang="ts">
-	import { applyAction, enhance } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
 	export let data;
 	import { Input } from '$lib/components';
 	import { getImageUrl } from '$lib/utils';
-	import type { SubmitFunction } from '@sveltejs/kit';
 	import { Icon, Pencil } from 'svelte-hero-icons';
-
-	let loading = false;
-	$: loading = false;
+	export let form;
 
 	const showPreview = (event: Event) => {
 		const target = <HTMLInputElement>event.target;
@@ -21,22 +16,6 @@
 			preview.src = src;
 		}
 	};
-
-	const submitUpdateProfile: SubmitFunction = () => {
-		loading = true;
-		return async ({ result }) => {
-			switch (result.type) {
-				case 'success':
-					await invalidateAll();
-					break;
-				case 'error':
-					break;
-				default:
-					await applyAction(result);
-			}
-			loading = false;
-		};
-	};
 </script>
 
 <div class="flex flex-col w-full h-full">
@@ -45,7 +24,6 @@
 		method="post"
 		class="flex flex-col space-y-2 w-full"
 		enctype="multipart/form-data"
-		use:enhance={submitUpdateProfile}
 	>
 		<h3 class="text-2xl font-medium">Update Profile</h3>
 		<div class="divider" />
@@ -78,14 +56,26 @@
 				accept="image/*"
 				hidden
 				on:change={showPreview}
-				disabled={loading}
 			/>
+			{#if form?.errors?.avatar && form?.errors?.avatar?.length > 0}
+				{#each form.errors.avatar as error}
+					<label for="avatar" class="label py-0 pt-1">
+						<span class="label-text-alt text-error">
+							{error}
+						</span>
+					</label>
+				{/each}
+			{/if}
 		</div>
-		<Input id="name" label="Name" type="text" value={data?.user?.name} disabled={loading} />
+		<Input
+			id="name"
+			label="Name"
+			type="text"
+			value={form?.data?.name || data?.user?.name}
+			errors={form?.errors?.name}
+		/>
 		<div class="w-full max-w-lg pt-3">
-			<button class="btn btn-primary w-full max-w-lg" type="submit" disabled={loading}
-				>Update Profile</button
-			>
+			<button class="btn btn-primary w-full max-w-lg" type="submit">Update Profile</button>
 		</div>
 	</form>
 </div>
