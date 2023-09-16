@@ -17,6 +17,9 @@ dependencies:
   pocketbase:
     specifier: ^0.16.0
     version: 0.16.0
+  svelte-french-toast:
+    specifier: ^1.2.0
+    version: 1.2.0(svelte@4.2.0)
   svelte-hero-icons:
     specifier: ^5.0.0
     version: 5.0.0
@@ -2808,6 +2811,15 @@ packages:
       svelte: 4.2.0
     dev: true
 
+  /svelte-french-toast@1.2.0(svelte@4.2.0):
+    resolution: {integrity: sha512-5PW+6RFX3xQPbR44CngYAP1Sd9oCq9P2FOox4FZffzJuZI2mHOB7q5gJBVnOiLF5y3moVGZ7u2bYt7+yPAgcEQ==}
+    peerDependencies:
+      svelte: ^3.57.0 || ^4.0.0
+    dependencies:
+      svelte: 4.2.0
+      svelte-writable-derived: 3.1.0(svelte@4.2.0)
+    dev: false
+
   /svelte-hero-icons@5.0.0:
     resolution: {integrity: sha512-xKMI/Z0f/6831I0R1YKJjVbAw9VBD6XKysvng6LtomlS4n3ZD1lZNAfLrrCmnc1pmiLr/8sVeQA8kgHLQwYlRg==}
     engines: {node: '>=14.0.0'}
@@ -2872,6 +2884,14 @@ packages:
       svelte: 4.2.0
       typescript: 5.2.2
     dev: true
+
+  /svelte-writable-derived@3.1.0(svelte@4.2.0):
+    resolution: {integrity: sha512-cTvaVFNIJ036vSDIyPxJYivKC7ZLtcFOPm1Iq6qWBDo1fOHzfk6ZSbwaKrxhjgy52Rbl5IHzRcWgos6Zqn9/rg==}
+    peerDependencies:
+      svelte: ^3.2.1 || ^4.0.0-next.1
+    dependencies:
+      svelte: 4.2.0
+    dev: false
 
   /svelte@4.2.0:
     resolution: {integrity: sha512-kVsdPjDbLrv74SmLSUzAsBGquMs4MPgWGkGLpH+PjOYnFOziAvENVzgJmyOCV2gntxE32aNm8/sqNKD6LbIpeQ==}

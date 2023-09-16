@@ -31,7 +31,10 @@ export const actions: Actions = {
 			const clientResponseErr = err as ClientResponseError;
 			console.error('Login Error:');
 			console.table(structuredClone(clientResponseErr.data));
-			throw error(clientResponseErr.status, clientResponseErr.response.message);
+			throw error(
+				clientResponseErr.status || 400,
+				clientResponseErr.response.message || 'An Error has occurred while logging in'
+			);
 		}
 
 		throw redirect(303, '/');

@@ -1,15 +1,18 @@
 <script>
 	import { getImageUrl } from '$lib/utils';
+	import { Toaster } from 'svelte-french-toast';
 	import '../app.postcss';
 	export let data;
 </script>
+
+<Toaster />
 
 <div class="min-h-full">
 	<nav class="navbar bg-base-100 shadow-lg">
 		<div class="flex-1">
 			<a href="/" class="btn btn-ghost normal-case text-xl">Personal CMS</a>
 		</div>
-		<div class="flex-none">
+		<div class="flex-none z-10">
 			{#if !data.user}
 				<div class="dropdow dropdown-end">
 					<a href="/login" class="btn btn-primary">Login</a>

@@ -9,7 +9,7 @@ export const load: PageServerLoad = ({ locals, params }) => {
 			const project = structuredClone(
 				await locals.pb.collection('projects').getOne<ProjectsResponse>(projectId)
 			);
-			return project;
+			return structuredClone(project);
 		} catch (err: unknown) {
 			console.log(err);
 			if (err instanceof ClientResponseError) {

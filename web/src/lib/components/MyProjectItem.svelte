@@ -2,11 +2,30 @@
 	import { enhance } from '$app/forms';
 	import type { ProjectsResponse } from '$lib/types/pocketbase-types';
 	import { getImageUrl } from '$lib/utils';
+	import type { SubmitFunction } from '@sveltejs/kit';
 	import { Modal } from '.';
+	import toast from 'svelte-french-toast';
 
 	let modalOpen = false;
+	let loading = false;
 	$: modalOpen;
+	$: loading;
 	export let project: ProjectsResponse;
+
+	const deleteProject: SubmitFunction = () => {
+		loading = true;
+		return async ({ result, update }) => {
+			if (result.type === 'success') {
+				toast.success('Project deleted successfully');
+				await update();
+			} else if (result.type === 'error') {
+				toast.error('Could not delete project. Try again later');
+			} else {
+				await update();
+			}
+			loading = false;
+		};
+	};
 </script>
 
 <div class="w-full h-28 flex items-center justify-between">
@@ -37,7 +56,7 @@
 			</div>
 			<div slot="actions" class="flex w-full items-center justify-center space-x-2">
 				<label for={project.id} class="btn btn-outline">Cancel</label>
-				<form action="?/deleteProject" method="POST" use:enhance>
+				<form action="?/deleteProject" method="POST" use:enhance={deleteProject}>
 					<input type="hidden" name="id" value={project.id} />
 					<button class="btn btn-error">Delete</button>
 				</form>
