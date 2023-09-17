@@ -9,7 +9,7 @@
 
 <Toaster />
 
-<div class="min-h-full scroll-smooth flex flex-col overflow-clip">
+<div class="min-h-full scroll-smooth flex flex-col overflow-clip font-mono">
 	<nav class="navbar bg-base-100">
 		{#if data.user}
 			<div class="flex-none z-10 justify-end w-full">
@@ -50,7 +50,7 @@
 			</div>
 		{/if}
 	</nav>
-	<main class="flex-1 max-w-screen-xl mx-auto px-2 sm:px-4 md:px-10 lg:px-12 w-full">
+	<main class="flex-1 max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-10 lg:px-12 w-full">
 		<slot />
 	</main>
 	<Footer />

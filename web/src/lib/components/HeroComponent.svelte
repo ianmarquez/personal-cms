@@ -3,16 +3,18 @@
 </script>
 
 <div class="hero aspect-video h-fit flex flex-row">
-	<div class="hero-content text-neutral-content">
+	<div class="hero-content text-neutral-content overflow-clip">
 		<div class="w-full flex flex-col gap-2 sm:gap-5">
 			<p class="text-lg sm:text-xl lg:text-2xl text-primary">Hi my name is</p>
-			<h1 class="mb-5 text-3xl sm:text-5xl lg:text-8xl font-semibold">Ian Marquez.</h1>
-			<p
-				class="relative w-[max-content]
+			<h1
+				class="mb-5 text-3xl sm:text-5xl lg:text-8xl font-semibold relative w-[max-content]
           before:absolute before:inset-0 before:animate-typewriter before:bg-base-100
           after:absolute after:inset-0 after:w-[0.125em] after:animate-caret
-          after:bg-primary text-3xl sm:text-5xl lg:text-8xl text-secondary"
+          after:bg-primary"
 			>
+				Ian Marquez.
+			</h1>
+			<p class="text-2xl sm:text-4xl lg:text-7xl text-secondary text-wrap">
 				I build <span class="text-primary font-semibold">"stuff"</span> for the web.
 			</p>
 			<p class="max-w-lg text-sm sm:text-md lg:text-lg">

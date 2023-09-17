@@ -11,8 +11,8 @@ const config = {
 	theme: {
 		extend: {
 			animation: {
-				typewriter: 'typewriter 4s steps(29) forwards',
-				caret: 'typewriter 4s steps(29) forwards, blink 1s steps(29) infinite 4s'
+				typewriter: 'typewriter 2s steps(12) forwards',
+				caret: 'typewriter 2s steps(12) forwards, blink 1s steps(12) infinite 2s'
 			},
 			keyframes: {
 				typewriter: {
