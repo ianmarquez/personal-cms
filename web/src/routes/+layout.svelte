@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Footer } from '$lib/components';
 	import { getImageUrl } from '$lib/utils';
 	import { Toaster } from 'svelte-french-toast';
 	import '../app.postcss';
@@ -8,13 +9,10 @@
 
 <Toaster />
 
-<div class="min-h-full scroll-smooth">
+<div class="min-h-full scroll-smooth flex flex-col overflow-clip">
 	<nav class="navbar bg-base-100">
 		{#if data.user}
-			<div class="flex-1">
-				<a href="/" class="btn btn-ghost normal-case text-xl">IanMarquez.dev</a>
-			</div>
-			<div class="flex-none z-10">
+			<div class="flex-none z-10 justify-end w-full">
 				<div class="dropdown dropdown-end mr-4">
 					<a href="/projects/new" class="btn btn-primary btn-outline">Add Project</a>
 				</div>
@@ -52,9 +50,8 @@
 			</div>
 		{/if}
 	</nav>
-	<main>
-		<div class="mx-auto px-4 sm:px-6 md:px-8">
-			<slot />
-		</div>
+	<main class="flex-1 max-w-screen-xl mx-auto px-2 sm:px-4 md:px-10 lg:px-12 w-full">
+		<slot />
 	</main>
+	<Footer />
 </div>

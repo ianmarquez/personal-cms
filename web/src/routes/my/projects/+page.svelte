@@ -1,9 +1,14 @@
 <script lang="ts">
 	import { MyProjectItem } from '$lib/components';
-
 	export let data;
 </script>
 
+<div class="text-md breadcrumbs">
+	<ul class="[&>li>a]:duration-300">
+		<li><a href="/" class="hover:text-primary">Home</a></li>
+		<li><a href="/my/projects" class="hover:text-primary">My Projects</a></li>
+	</ul>
+</div>
 <h2 class="text-3xl font-bold">My Projects</h2>
 <div class="w-full mt-4 flex flex-col items-center">
 	{#if data.projects.length === 0}
