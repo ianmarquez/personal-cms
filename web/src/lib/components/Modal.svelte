@@ -3,11 +3,11 @@
 	export let checked: boolean;
 </script>
 
-<label for={label}>
+<label for={label} class="w-fit">
 	<slot name="trigger" />
 </label>
 
-<input type="checkbox" {checked} id={label} class="modal-toggle" />
+<input type="checkbox" {checked} id={label} class="modal-toggle w-fit" />
 <label for={label} class="modal modal-bottom sm:modal-middle">
 	<label for="" class="modal-box">
 		<div class="font-bold text-xl text-center">

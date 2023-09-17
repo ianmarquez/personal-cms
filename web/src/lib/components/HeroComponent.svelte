@@ -7,10 +7,11 @@
 		<div class="w-full flex flex-col gap-2 sm:gap-5">
 			<p class="text-lg sm:text-xl lg:text-2xl text-primary">Hi my name is</p>
 			<h1
-				class="mb-5 text-3xl sm:text-5xl lg:text-8xl font-semibold relative w-[max-content]
-          before:absolute before:inset-0 before:animate-typewriter before:bg-base-100
-          after:absolute after:inset-0 after:w-[0.125em] after:animate-caret
-          after:bg-primary"
+				class={clsx(
+					'mb-5 text-3xl sm:text-5xl lg:text-8xl font-semibold relative w-[max-content]',
+					'after:absolute after:inset-0 after:w-[0.125em] after:animate-caret after:bg-primary',
+					'before:absolute before:inset-0 before:h-[1.25em] before:animate-typewriter before:bg-base-100'
+				)}
 			>
 				Ian Marquez.
 			</h1>
