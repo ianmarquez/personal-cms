@@ -1,24 +1,20 @@
-<script>
+<script lang="ts">
 	import { getImageUrl } from '$lib/utils';
 	import { Toaster } from 'svelte-french-toast';
 	import '../app.postcss';
+	import 'iconify-icon';
 	export let data;
 </script>
 
 <Toaster />
 
-<div class="min-h-full">
-	<nav class="navbar bg-base-100 shadow-lg">
-		<div class="flex-1">
-			<a href="/" class="btn btn-ghost normal-case text-xl">Personal CMS</a>
-		</div>
-		<div class="flex-none z-10">
-			{#if !data.user}
-				<div class="dropdow dropdown-end">
-					<a href="/login" class="btn btn-primary">Login</a>
-					<a href="/register" class="btn btn-secondary">Register</a>
-				</div>
-			{:else}
+<div class="min-h-full scroll-smooth">
+	<nav class="navbar bg-base-100">
+		{#if data.user}
+			<div class="flex-1">
+				<a href="/" class="btn btn-ghost normal-case text-xl">IanMarquez.dev</a>
+			</div>
+			<div class="flex-none z-10">
 				<div class="dropdown dropdown-end mr-4">
 					<a href="/projects/new" class="btn btn-primary btn-outline">Add Project</a>
 				</div>
@@ -53,11 +49,11 @@
 						</li>
 					</ul>
 				</div>
-			{/if}
-		</div>
+			</div>
+		{/if}
 	</nav>
-	<main class="py-4">
-		<div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+	<main>
+		<div class="mx-auto px-4 sm:px-6 md:px-8">
 			<slot />
 		</div>
 	</main>

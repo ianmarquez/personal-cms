@@ -39,6 +39,7 @@ export const load: PageServerLoad = ({ locals, params }) => {
 
 export const actions: Actions = {
 	updateProject: async ({ request, locals, params }) => {
+		if (!locals.user) throw redirect(303, '/login');
 		const body = await request.formData();
 		if (!params.projectId) throw error(400, 'Project ID is required');
 
@@ -46,7 +47,7 @@ export const actions: Actions = {
 		if (thumb.size === 0) {
 			body.delete('thumbnail');
 		}
-
+		body.append('user', locals.user.id);
 		const { formData, errors } = await validateData<ProjectFormData>(body, projectSchema);
 
 		if (errors) {

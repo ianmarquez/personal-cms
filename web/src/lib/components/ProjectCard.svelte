@@ -8,7 +8,7 @@
 <div class="overflow-clip card w-96 bg-base-100 shadow-2xl">
 	<figure>
 		<img
-			class="aspect-[3/2]"
+			class="aspect-video"
 			src={project.thumbnail
 				? getImageUrl(project.collectionId, project.id, project.thumbnail)
 				: `https://via.placeholder.com/500/4506cb/FFFFFF/?text=${project.name}`}

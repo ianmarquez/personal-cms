@@ -9,7 +9,36 @@ const config = {
 		themes: ['winter', 'dracula']
 	},
 	theme: {
-		extend: {}
+		extend: {
+			animation: {
+				typewriter: 'typewriter 4s steps(28) forwards',
+				caret: 'typewriter 4s steps(28) forwards, blink 1s steps(28) infinite 4s'
+			},
+			keyframes: {
+				typewriter: {
+					to: {
+						left: '100%'
+					}
+				},
+				blink: {
+					'0%': {
+						opacity: '0'
+					},
+					'0.1%': {
+						opacity: '1'
+					},
+					'50%': {
+						opacity: '1'
+					},
+					'50.1%': {
+						opacity: '0'
+					},
+					'100%': {
+						opacity: '0'
+					}
+				}
+			}
+		}
 	},
 	plugins: [forms, typography, daisyui]
 };

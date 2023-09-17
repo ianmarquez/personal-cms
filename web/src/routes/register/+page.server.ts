@@ -10,6 +10,7 @@ export type OutputType = {
 };
 
 export const load: PageServerLoad<OutputType> = async ({ locals, url }) => {
+	throw redirect(303, '/');
 	const authMethods = await locals.pb.collection('users').listAuthMethods();
 	if (!authMethods) {
 		return {
