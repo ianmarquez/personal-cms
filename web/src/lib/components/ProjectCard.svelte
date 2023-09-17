@@ -5,7 +5,7 @@
 	export let project: ProjectsResponse;
 </script>
 
-<div class="overflow-clip card w-96 bg-base-100 shadow-2xl">
+<a href="/projects/{project.id}" class="overflow-clip card w-96 bg-base-100 shadow-2xl">
 	<figure>
 		<img
 			class="aspect-video"
@@ -20,8 +20,6 @@
 		<p>{project.tagline}</p>
 
 		<p class="text-sm text-gray-50">{project.description}</p>
-		<div class="card-actions justify-end">
-			<a href="/projects/{project.id}" class="btn btn-primary">View Project</a>
-		</div>
+		<div class="card-actions justify-end" />
 	</div>
-</div>
+</a>

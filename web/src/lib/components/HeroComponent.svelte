@@ -15,6 +15,32 @@
 				I'm a software engineer with 9 years of industry experience. Feel free to reach out to me
 				with the information below.
 			</p>
+			<section class="flex flex-row gap-4 text-2xl">
+				<div class="tooltip tooltip-primary" data-tip="Neovim">
+					<iconify-icon icon="devicon:vim" />
+				</div>
+				<div class="tooltip tooltip-primary" data-tip="Svelte and SvelteKit">
+					<iconify-icon icon="devicon:svelte" />
+				</div>
+				<div class="tooltip tooltip-primary" data-tip="NodeJS">
+					<iconify-icon icon="devicon:nodejs" />
+				</div>
+				<div class="tooltip tooltip-primary" data-tip="Javascript">
+					<iconify-icon icon="devicon:javascript" />
+				</div>
+				<div class="tooltip tooltip-primary" data-tip="Typescript">
+					<iconify-icon icon="devicon:typescript" />
+				</div>
+				<div class="tooltip tooltip-primary" data-tip="React">
+					<iconify-icon icon="devicon:react" />
+				</div>
+				<div class="tooltip tooltip-primary" data-tip="NextJS">
+					<iconify-icon icon="devicon:nextjs" />
+				</div>
+				<div class="tooltip tooltip-primary" data-tip="TailwindCSS">
+					<iconify-icon icon="devicon:tailwindcss" />
+				</div>
+			</section>
 			<section
 				class="flex flex-col justrify-center gap-4 [&>a]:flex [&>a]:flex-row [&>a]:items-center [&>a]:gap-2"
 			>
