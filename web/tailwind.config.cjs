@@ -9,6 +9,9 @@ const config = {
 		themes: ['winter', 'dracula']
 	},
 	theme: {
+		fontFamily: {
+			mono: ['JetBrains Mono', 'monospace']
+		},
 		extend: {
 			animation: {
 				typewriter: 'typewriter 2s steps(12) forwards',

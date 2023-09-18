@@ -9,7 +9,11 @@
 	)}
 >
 	<aside>
-		<p>Designed and built by <span class="text-primary">Ian Marquez</span></p>
+		<p>
+			Designed and built by
+			<a href="https://github.com/ianmarquez" class="link text-primary">Ian Marquez</a> with
+			<a href="https://kit.svelte.dev/" class="link text-primary">SvelteKit</a>
+		</p>
 	</aside>
 	<nav class="flex flex-row gap-4">
 		<a href="tel:6593928822" target="_blank" class="link hover:text-primary">

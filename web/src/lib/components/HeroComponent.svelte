@@ -1,9 +1,68 @@
 <script lang="ts">
 	import clsx from 'clsx';
+	import { onMount } from 'svelte';
+
+	const contacts: Array<{ icon: string; url: string; text: string }> = [
+		{
+			icon: 'bi:telephone-fill',
+			url: 'tel:6593928822',
+			text: '+65-9392-8822'
+		},
+		{
+			icon: 'bi:envelope-fill',
+			url: 'mailto:regilmarquez123@gmail.com',
+			text: 'regilmarquez123@gmail.com'
+		},
+		{
+			icon: 'bi:linkedin',
+			url: 'https://www.linkedin.com/in/ian-marquez-99930780/',
+			text: 'ian-marquez-99930780'
+		},
+		{
+			icon: 'bi:github',
+			url: 'https://github.com/ianmarquez',
+			text: 'ianmarquez'
+		}
+	];
+
+	const techUsed: Array<{ icon: string; toolTip: string }> = [
+		{
+			icon: 'skill-icons:neovim-light',
+			toolTip: 'Neovim'
+		},
+		{
+			icon: 'skill-icons:svelte',
+			toolTip: 'Svelte and SvelteKit'
+		},
+		{
+			icon: 'skill-icons:nodejs-light',
+			toolTip: 'NodeJS'
+		},
+		{
+			icon: 'skill-icons:javascript',
+			toolTip: 'JavaScript'
+		},
+		{
+			icon: 'skill-icons:typescript',
+			toolTip: 'Typescript'
+		},
+		{
+			icon: 'skill-icons:react-light',
+			toolTip: 'React'
+		},
+		{
+			icon: 'skill-icons:nextjs-dark',
+			toolTip: 'NextJS'
+		},
+		{
+			icon: 'skill-icons:tailwindcss-light',
+			toolTip: 'TailwindCSS'
+		}
+	];
 </script>
 
 <div class="hero aspect-video h-fit flex flex-row">
-	<div class="hero-content text-neutral-content overflow-clip">
+	<div class="hero-content text-neutral-content">
 		<div class="w-full flex flex-col gap-2 sm:gap-5">
 			<p class="text-lg sm:text-xl lg:text-2xl text-primary">Hi my name is</p>
 			<h1
@@ -23,30 +82,11 @@
 				through the channels below.
 			</p>
 			<section class="flex flex-row gap-4 text-2xl">
-				<div class="tooltip tooltip-primary" data-tip="Neovim">
-					<iconify-icon icon="devicon:vim" />
-				</div>
-				<div class="tooltip tooltip-primary" data-tip="Svelte and SvelteKit">
-					<iconify-icon icon="devicon:svelte" />
-				</div>
-				<div class="tooltip tooltip-primary" data-tip="NodeJS">
-					<iconify-icon icon="devicon:nodejs" />
-				</div>
-				<div class="tooltip tooltip-primary" data-tip="Javascript">
-					<iconify-icon icon="devicon:javascript" />
-				</div>
-				<div class="tooltip tooltip-primary" data-tip="Typescript">
-					<iconify-icon icon="devicon:typescript" />
-				</div>
-				<div class="tooltip tooltip-primary" data-tip="React">
-					<iconify-icon icon="devicon:react" />
-				</div>
-				<div class="tooltip tooltip-primary" data-tip="NextJS">
-					<iconify-icon icon="devicon:nextjs" />
-				</div>
-				<div class="tooltip tooltip-primary" data-tip="TailwindCSS">
-					<iconify-icon icon="devicon:tailwindcss" />
-				</div>
+				{#each techUsed as tech}
+					<div class="tooltip tooltip-primary" data-tip={tech.toolTip}>
+						<iconify-icon icon={tech.icon} />
+					</div>
+				{/each}
 			</section>
 			<section
 				class={clsx(
@@ -55,26 +95,12 @@
 					'text-sm sm:text-md lg:text-lg'
 				)}
 			>
-				<a href="tel:6593928822" target="_blank" class="link hover:text-primary">
-					<iconify-icon icon="bi:telephone-fill" />
-					+6593928822
-				</a>
-				<a href="mailto:regilmarquez123@gmail.com" target="_blank" class="link hover:text-primary">
-					<iconify-icon icon="bi:envelope-fill" />
-					regilmarquez123@gmail.com
-				</a>
-				<a
-					href="https://www.linkedin.com/in/ian-marquez-99930780/"
-					target="_blank"
-					class="link hover:text-primary"
-				>
-					<iconify-icon icon="bi:linkedin" />
-					ian-marquez-99930780
-				</a>
-				<a href="https://github.com/ianmarquez" target="_blank" class="link hover:text-primary">
-					<iconify-icon icon="bi:github" />
-					ianmarquez
-				</a>
+				{#each contacts as contact}
+					<a href={contact.url} target="_blank" class="link hover:text-primary">
+						<iconify-icon icon={contact.icon} />
+						{contact.text}
+					</a>
+				{/each}
 			</section>
 		</div>
 	</div>
