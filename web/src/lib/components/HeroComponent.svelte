@@ -1,7 +1,24 @@
 <script lang="ts">
 	import clsx from 'clsx';
-	import { onMount } from 'svelte';
+	import { animate, stagger } from 'motion';
 
+	function animateTechUsed(element: HTMLSpanElement) {
+		if (element.children.length === 0) return;
+		animate(
+			[...element.children],
+			{ opacity: [0, 1], y: [10, 0] },
+			{ duration: 0.2, delay: stagger(0.2) }
+		);
+	}
+
+	function animateContact(element: HTMLSpanElement) {
+		if (element.children.length === 0) return;
+		animate(
+			[...element.children],
+			{ opacity: [0, 1], y: [10, 0] },
+			{ duration: 0.5, delay: stagger(0.5) }
+		);
+	}
 	const contacts: Array<{ icon: string; url: string; text: string }> = [
 		{
 			icon: 'bi:telephone-fill',
@@ -64,7 +81,7 @@
 <div class="hero aspect-video h-fit flex flex-row">
 	<div class="hero-content text-neutral-content">
 		<div class="w-full flex flex-col gap-2 sm:gap-5">
-			<p class="text-lg sm:text-xl lg:text-2xl text-primary">Hi my name is</p>
+			<p class="text-primary text-lg sm:text-xl lg:text-2xl">Hi my name is</p>
 			<h1
 				class={clsx(
 					'mb-5 text-3xl sm:text-5xl lg:text-8xl font-semibold relative w-[max-content]',
@@ -74,14 +91,14 @@
 			>
 				Ian Marquez.
 			</h1>
-			<p class="text-2xl sm:text-4xl lg:text-7xl text-secondary text-wrap">
+			<p class={'text-2xl sm:text-4xl lg:text-7xl text-secondary text-wrap'}>
 				I build <span class="text-primary font-semibold">"stuff"</span> for the web.
 			</p>
 			<p class="max-w-lg text-sm sm:text-md lg:text-lg">
 				I'm a software engineer with 10+ years of industry experience. Feel free to reach out to me
 				through the channels below.
 			</p>
-			<section class="flex flex-row gap-4 text-2xl">
+			<section use:animateTechUsed class="flex flex-row gap-4 text-2xl">
 				{#each techUsed as tech}
 					<div class="tooltip tooltip-primary" data-tip={tech.toolTip}>
 						<iconify-icon icon={tech.icon} />
@@ -89,6 +106,7 @@
 				{/each}
 			</section>
 			<section
+				use:animateContact
 				class={clsx(
 					'flex flex-col justrify-center gap-4',
 					'[&>a]:flex [&>a]:flex-row [&>a]:items-center [&>a]:gap-2 [&>a]:w-fit [&>a]:duration-300',

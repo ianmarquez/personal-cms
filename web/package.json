@@ -42,6 +42,7 @@
 		"@types/node": "^20.6.2",
 		"clsx": "^2.0.0",
 		"iconify-icon": "^1.0.8",
+		"motion": "^10.16.2",
 		"object-to-formdata": "^4.5.1",
 		"pocketbase": "^0.16.0",
 		"svelte-french-toast": "^1.2.0",
