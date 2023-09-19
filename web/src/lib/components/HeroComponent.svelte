@@ -1,6 +1,7 @@
 <script lang="ts">
 	import clsx from 'clsx';
 	import { animate, stagger } from 'motion';
+	import WindowEmulator from './WindowEmulator.svelte';
 
 	function animateTechUsed(element: HTMLSpanElement) {
 		if (element.children.length === 0) return;
@@ -78,48 +79,50 @@
 	];
 </script>
 
-<div class="hero aspect-video h-fit flex flex-row">
-	<div class="hero-content text-neutral-content">
-		<div class="w-full flex flex-col gap-2 sm:gap-5">
-			<p class="text-primary text-lg sm:text-xl lg:text-2xl">Hi my name is</p>
-			<h1
-				class={clsx(
-					'mb-5 text-3xl sm:text-5xl lg:text-8xl font-semibold relative w-[max-content]',
-					'after:absolute after:inset-0 after:w-[0.125em] after:animate-caret after:bg-primary',
-					'before:absolute before:inset-0 before:h-[1.25em] before:animate-typewriter before:bg-base-100'
-				)}
-			>
-				Ian Marquez.
-			</h1>
-			<p class={'text-2xl sm:text-4xl lg:text-7xl text-secondary text-wrap'}>
-				I build <span class="text-primary font-semibold">"stuff"</span> for the web.
-			</p>
-			<p class="max-w-lg text-sm sm:text-md lg:text-lg">
-				I'm a software engineer with 10+ years of industry experience. Feel free to reach out to me
-				through the channels below.
-			</p>
-			<section use:animateTechUsed class="flex flex-row gap-4 text-2xl">
-				{#each techUsed as tech}
-					<div class="tooltip tooltip-primary" data-tip={tech.toolTip}>
-						<iconify-icon icon={tech.icon} />
-					</div>
-				{/each}
-			</section>
-			<section
-				use:animateContact
-				class={clsx(
-					'flex flex-col justrify-center gap-4',
-					'[&>a]:flex [&>a]:flex-row [&>a]:items-center [&>a]:gap-2 [&>a]:w-fit [&>a]:duration-300',
-					'text-sm sm:text-md lg:text-lg'
-				)}
-			>
-				{#each contacts as contact}
-					<a href={contact.url} target="_blank" class="link hover:text-primary">
-						<iconify-icon icon={contact.icon} />
-						{contact.text}
-					</a>
-				{/each}
-			</section>
+<WindowEmulator>
+	<div class="hero aspect-video h-fit flex flex-row">
+		<div class="hero-content text-neutral-content">
+			<div class="w-full flex flex-col gap-2 sm:gap-5">
+				<p class="text-primary text-lg sm:text-xl lg:text-2xl">Hi my name is</p>
+				<h1
+					class={clsx(
+						'mb-5 text-3xl sm:text-5xl lg:text-8xl font-semibold relative w-[max-content]',
+						'after:absolute after:inset-0 after:w-[0.125em] after:animate-caret after:bg-primary',
+						'before:absolute before:inset-0 before:h-[1.25em] before:animate-typewriter before:bg-base-100'
+					)}
+				>
+					Ian Marquez.
+				</h1>
+				<p class={'text-2xl sm:text-4xl lg:text-7xl text-secondary text-wrap'}>
+					I build <span class="text-primary font-semibold">"stuff"</span> for the web.
+				</p>
+				<p class="max-w-lg text-sm sm:text-md lg:text-lg">
+					I'm a software engineer with 10+ years of industry experience. Feel free to reach out to
+					me through the channels below.
+				</p>
+				<section use:animateTechUsed class="flex flex-row gap-4 text-2xl">
+					{#each techUsed as tech}
+						<div class="tooltip tooltip-primary" data-tip={tech.toolTip}>
+							<iconify-icon icon={tech.icon} />
+						</div>
+					{/each}
+				</section>
+				<section
+					use:animateContact
+					class={clsx(
+						'flex flex-col justrify-center gap-4',
+						'[&>a]:flex [&>a]:flex-row [&>a]:items-center [&>a]:gap-2 [&>a]:w-fit [&>a]:duration-300',
+						'text-sm sm:text-md lg:text-lg'
+					)}
+				>
+					{#each contacts as contact}
+						<a href={contact.url} target="_blank" class="link hover:text-primary">
+							<iconify-icon icon={contact.icon} />
+							{contact.text}
+						</a>
+					{/each}
+				</section>
+			</div>
 		</div>
 	</div>
-</div>
+</WindowEmulator>
