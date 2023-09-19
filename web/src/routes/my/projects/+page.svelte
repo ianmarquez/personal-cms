@@ -1,6 +1,16 @@
 <script lang="ts">
 	import { ProjectCard } from '$lib/components';
+	import { animate, stagger } from 'motion';
 	export let data;
+
+	function animateProjectCards(element: HTMLDivElement) {
+		if (element.children.length === 0) return;
+		animate(
+			[...element.children],
+			{ opacity: [0, 1], y: [-20, 0] },
+			{ duration: 0.5, delay: stagger(0.5) }
+		);
+	}
 </script>
 
 <div class="text-md breadcrumbs">
@@ -10,7 +20,7 @@
 	</ul>
 </div>
 <h2 class="text-3xl font-bold">My Projects</h2>
-<div class="w-full mt-4 flex flex-col items-center gap-5">
+<div use:animateProjectCards class="w-full mt-4 flex flex-col items-center gap-5">
 	{#if data.projects.length === 0}
 		<p class="text-center text-3xl">Looks like you dont have any projects.</p>
 		<a href="/projects/new" class="btn btn-primary max-w-md mt-4">Add One</a>
