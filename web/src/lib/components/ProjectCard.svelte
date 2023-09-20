@@ -30,7 +30,7 @@
 	};
 </script>
 
-<div class="card sm:card-side bg-base-200 hover:bg-base-100 duration-300 shadow-2xl w-full">
+<div class="card sm:card-side bg-base-200 hover:bg-base-100 duration-300 shadow-sm w-full">
 	<figure class="flex-shrink-0">
 		<img
 			class="aspect-video w-full sm:w-[250px] sm:h-full"

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import clsx from 'clsx';
 	import { animate, stagger } from 'motion';
-	import WindowEmulator from './WindowEmulator.svelte';
+	import { AsciiArtHeader, WindowEmulator } from '$lib/components';
 
 	function animateTechUsed(element: HTMLSpanElement) {
 		if (element.children.length === 0) return;
@@ -84,15 +84,7 @@
 		<div class="hero-content text-neutral-content">
 			<div class="w-full flex flex-col gap-2 sm:gap-5">
 				<p class="text-primary text-lg sm:text-xl lg:text-2xl">Hi my name is</p>
-				<h1
-					class={clsx(
-						'mb-5 text-3xl sm:text-5xl lg:text-8xl font-semibold relative w-[max-content]',
-						'after:absolute after:inset-0 after:w-[0.125em] after:animate-caret after:bg-primary',
-						'before:absolute before:inset-0 before:h-[1.25em] before:animate-typewriter before:bg-base-100'
-					)}
-				>
-					Ian Marquez.
-				</h1>
+				<AsciiArtHeader />
 				<p class={'text-2xl sm:text-4xl lg:text-7xl text-secondary text-wrap'}>
 					I build <span class="text-primary font-semibold">"stuff"</span> for the web.
 				</p>
