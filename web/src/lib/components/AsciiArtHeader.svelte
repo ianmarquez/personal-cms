@@ -28,7 +28,7 @@
 	}
 </script>
 
-<div class="text-[0.45rem] md:text-[0.75rem] lg:text-xl">
+<div class="text-[0.40rem] md:text-[0.75rem] lg:text-xl">
 	<pre
 		class={clsx(
 			'leading-none h-fit overflow-hidden',

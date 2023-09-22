@@ -1,7 +1,7 @@
 <script lang="ts">
 	import clsx from 'clsx';
 	import { animate, stagger } from 'motion';
-	import { AsciiArtHeader, WindowEmulator } from '$lib/components';
+	import { AsciiArtHeader } from '$lib/components';
 
 	function animateTechUsed(element: HTMLSpanElement) {
 		if (element.children.length === 0) return;
@@ -79,9 +79,11 @@
 	];
 </script>
 
-<WindowEmulator>
+<div
+	class="relative border-8 border-white rounded-lg shadow-lg w-full shadow-primary overflow-hidden p-6"
+>
 	<div class="hero aspect-video h-fit flex flex-row">
-		<div class="hero-content text-neutral-content">
+		<div class="hero-content text-neutral-content p-0">
 			<div class="w-full flex flex-col gap-2 sm:gap-5">
 				<p class="text-primary text-lg sm:text-xl lg:text-2xl">Hi my name is</p>
 				<AsciiArtHeader />
@@ -117,4 +119,4 @@
 			</div>
 		</div>
 	</div>
-</WindowEmulator>
+</div>

@@ -2,31 +2,11 @@ import { registerUserSchema } from '$lib/schemas';
 import { generateUsername, validateData } from '$lib/utils';
 import { error, fail, redirect } from '@sveltejs/kit';
 import { ClientResponseError } from 'pocketbase';
-import type { Actions, PageServerLoad } from './$types';
+import type { Actions } from './$types';
 
 export type OutputType = {
 	authProviderRedirect: string;
 	authProviderState: string;
-};
-
-export const load: PageServerLoad<OutputType> = async ({ locals, url }) => {
-	throw redirect(303, '/');
-	const authMethods = await locals.pb.collection('users').listAuthMethods();
-	if (!authMethods) {
-		return {
-			authProviderState: '',
-			authProviderRedirect: ''
-		};
-	}
-	const redirectUrl = `${url.origin}/oauth`;
-	const [authProvider] = authMethods.authProviders.filter((item) => item.name === 'discord');
-	const authProviderRedirect = `${authProvider.authUrl}${redirectUrl}`;
-	const state = authProvider.state;
-
-	return {
-		authProviderState: state,
-		authProviderRedirect
-	};
 };
 
 export const actions: Actions = {
@@ -44,7 +24,7 @@ export const actions: Actions = {
 		}
 
 		const username = generateUsername(formData.name);
-		formData.body.username = username;
+		formData.username = username;
 
 		try {
 			await locals.pb.collection('users').create(formData);

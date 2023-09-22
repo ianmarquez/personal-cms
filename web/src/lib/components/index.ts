@@ -4,16 +4,6 @@ import Modal from './Modal.svelte';
 import ProjectCard from './ProjectCard.svelte';
 import TextArea from './TextArea.svelte';
 import Footer from './Footer.svelte';
-import WindowEmulator from './WindowEmulator.svelte';
 import AsciiArtHeader from './AsciiArtHeader.svelte';
 
-export {
-	HeroComponent,
-	Input,
-	Modal,
-	ProjectCard,
-	TextArea,
-	Footer,
-	WindowEmulator,
-	AsciiArtHeader
-};
+export { HeroComponent, Input, Modal, ProjectCard, TextArea, Footer, AsciiArtHeader };
